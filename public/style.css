@@ -53,6 +53,7 @@ header{
   display: flex;
   justify-content: start;
   margin-top: 1rem;
+  margin-bottom: 0.6rem;
   font-weight: 300;
 }
 input{
@@ -85,6 +86,10 @@ button{
 }
 button:focus{
   outline-color: #116FE1;
+}
+.error{
+  color: red;
+  font-size: 1.8rem;
 }
 
 h1{

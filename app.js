@@ -9,13 +9,14 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-var query = '';
-var temp = 0;
-var weatherDescription = '';
+var query = 'this web app';
+var temp = 200;
+var weatherDescription = 'Bright';
 var imageURL = '';
+var err= '';
 
 app.get("/", function(req, res){
-  res.render('weather', {description: weatherDescription, name: query, temperature: temp, image: imageURL});
+  res.render('weather', {description: weatherDescription, name: query, temperature: temp, image: imageURL, error: err});
 });
 
 app.post("/", function(req, res){
@@ -29,16 +30,26 @@ app.post("/", function(req, res){
     response.on("data", function(data){
       const weatherData = JSON.parse(data);
 
-      temp = weatherData.main.temp;
-      weatherDescription = weatherData.weather[0].description;
-      icon = weatherData.weather[0].icon;
-      imageURL = "http://openweathermap.org/img/wn/" + icon + ".png";
+      if(weatherData.main){
+        err = '';
+        temp = weatherData.main.temp;
+        weatherDescription = weatherData.weather[0].description;
+        icon = weatherData.weather[0].icon;
+        imageURL = "http://openweathermap.org/img/wn/" + icon + ".png";
+      } else{
+        err = 'Invalid city, Enter another city';
+        temp = 0;
+        weatherDescription = 'Invalid';
+      }
 
       res.redirect("/");
     });
   }); 
 });
 
-app.listen(process.env.PORT || 3000, ()=>{
-  console.log(`app is running on port ${process.env.PORT}`);
+// app.listen(process.env.PORT || 3000, ()=>{
+//   console.log(`app is running on port ${process.env.PORT}`);
+// });
+app.listen(3000, ()=>{
+  console.log(`app is running on port 3000`);
 });
