@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather App</title>
+  <title>Weather Web App</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
@@ -14,27 +14,34 @@
 </head>
 <body>
 
-  <main class="grid-container">
-    <header class="item1">
+  <main>
+
+    <header>
       <h1>Welcome to the <span class="highlight">Weather</span> Web App</h1>
       <p>Let's check the weather of your city</p>
     </header>
-    <div id="inputDiv" class="item2">
-      <form action="/" method="post">
-        <label for="cityInput">City Name: </label>
+
+    <div id="input-output">
+      
+      <form id="input" action="/" method="post">
+        <label for="cityName" id="cityNameLabel">City Name : </label>
+
         <div class="search-box">
-          <input id="cityInput" type="text" name="cityName" 
-          placeholder="Enter City" autocomplete="off">
-          <button type="submit">Search</button>
+          <input id="cityName" type="text" name="cityName" 
+          placeholder="Enter a valid City" autocomplete="off">
+          <button id="search" type="submit">Search</button>
         </div>
+
         <p class="error"><%= error%></p>
       </form>
+  
+      <div id="output">
+        <h1>The Weather is currently <span class="highlight"><%= description %></span></h1>
+        <p>The temperature in <span class="highlight"><%= name %></span> is <span class="highlight"><%= temperature %></span> degrees Celcius</p>
+        <img src="<%= image %>" />
+      </div>
     </div>
-    <div id="resultDiv" class="item3">
-      <h1>The Weather is currently <%= description %></h1>
-      <p>The temperature in <%= name %> is <%= temperature %> degrees Celcius</p>
-      <img src="<%= image %>" />
-    </div>
+
   </main>
 </body>
 </html>

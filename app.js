@@ -13,7 +13,7 @@ var query = 'this web app';
 var temp = 200;
 var weatherDescription = 'Bright';
 var imageURL = '';
-var err= '';
+var err = '';
 
 app.get("/", function(req, res){
   res.render('weather', {description: weatherDescription, name: query, temperature: temp, image: imageURL, error: err});
